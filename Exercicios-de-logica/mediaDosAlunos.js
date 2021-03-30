@@ -1,13 +1,18 @@
 function Media(array){
-    let mediaFinal = array.sort((a, b) => (a.nome > b.nome) ? 1 : (b.nome > a.nome) ? -1 : 0).map(e => {
-        let media = e.notas.reduce(calcMedia) / 3;
-
-        return `Aluno ${e.nome} ficou com média final ${media.toFixed(1)}`;
-    });
+    let mediaFinal = array.sort(alunosEmOrdem).map(result);
 
     return mediaFinal;
 };
 
+const calcMedia = (a, e) => a + e;
+
+const alunosEmOrdem = (a, b) => (a.nome > b.nome) ? 1 : (b.nome > a.nome) ? -1 : 0;
+
+const result = e => {
+    let media = e.notas.reduce(calcMedia) / 3;
+
+    return `Aluno ${e.nome} ficou com média final ${media.toFixed(1)}`;
+}
 
 const alunos = [
     {nome: 'Carlos', notas:[8.5, 9.4, 9.9]},
@@ -22,6 +27,6 @@ const alunos = [
     {nome: 'Zune', notas:[2.1, 3.4, 2.5]}
 ];
 
-const calcMedia = (a, e) => a + e;
+
 
 console.log(Media(alunos));

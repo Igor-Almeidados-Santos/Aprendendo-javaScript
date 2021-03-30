@@ -6,7 +6,7 @@ function VogalOuConsoante(letra){
         if(e === valor) return e ;
     });
  
-    return result == undefined ? `A letra ${letra} é uma consoante.`: `A letra ${letra} é uma vogal.`
+    return result == undefined ? `A letra ${letra} é uma consoante.`: `A letra ${letra} é uma vogal.`;
  };
  
  console.log(VogalOuConsoante('a'));
