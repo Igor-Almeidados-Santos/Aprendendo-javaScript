@@ -1,7 +1,44 @@
-function BuscaFuncionário(nome, sobrenome, metodo, lista){
-    let funcionario = lista.reduce()
+function BuscaFuncionário(nome, sobrenome, lista){
+    let funcionario = lista.filter(e => e.nome == nome && e.sobrenome == sobrenome);
+
+    let salarioLiquido = 0;
+
+    funcionario.length == 0 ? funcionario = `funcionário não encontrado!` : salarioLiquido = calcSalarioLiquido(funcionario);
+
+    return typeof salarioLiquido == 'string' ? salarioLiquido : funcionario;
 };
 
+function calcSalarioLiquido(funcionario){
+    let salarioComDesconto = 0;
+
+    if(funcionario[0].salarioBruto <= 900){
+
+        salarioComDesconto = funcionario[0].salarioBruto;
+
+    }else if(funcionario[0].salarioBruto > 900 && funcionario[0].salarioBruto <= 1500){
+
+        salarioComDesconto = funcionario[0].salarioBruto - (funcionario[0].salarioBruto * 5/100);
+
+    }else if(funcionario[0].salarioBruto > 1500 && funcionario[0].salarioBruto <= 2500){
+
+        salarioComDesconto = funcionario[0].salarioBruto - (funcionario[0].salarioBruto * 10/100);
+
+    }else {
+
+        salarioComDesconto = funcionario[0].salarioBruto - (funcionario[0].salarioBruto * 20/100);
+
+    }
+
+    salarioComDesconto -= (funcionario[0].salarioBruto * 3/100);
+
+    salarioComDesconto += calcHorasExtras(funcionario);
+
+    return `O Salário liquido do funcionário ${funcionario[0].nome} é: R$${salarioComDesconto.toFixed(2).toString().replace(".", ",")}`;
+};
+
+const calcHorasExtras = funcionario => {
+    return (funcionario[0].salarioHora + funcionario[0].salarioHora / 2) * funcionario[0].horasExtras; 
+}
 
 const funcionarios = [
     {
@@ -12,37 +49,6 @@ const funcionarios = [
         salarioHora: 6.5,
         horasTrabalhadas: 176,
         horasExtras: 4,
-
-        salarioLiquido(){
-            let salarioComDesconto = 0;
-
-            if(this.salarioBruto <= 900){
-
-                salarioComDesconto = this.salarioBruto;
-
-            }else if(this.salarioBruto > 900 && this.salarioBruto <= 1500){
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 5/100);
-
-            }else if(this.salarioBruto > 1500 && this.salarioBruto <= 2500){
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 10/100);
-
-            }else {
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 20/100);
-
-            }
-
-            salarioComDesconto -= (this.salarioBruto * 3/100);
-
-            return `O Salário liquido do funcionário ${this.nome} é: R$${salarioComDesconto.toFixed(2).toString().replace(".", ",")}`;
-        },
-    
-        calcHorasExtras(){
-           return this.horasExtras > 0 ? (this.salarioHora + this.salarioHora / 2) * this.horasExtras : `O Funcionário ${this.nome} Não fez horas extras este mês!`;
-        }
-        
     },
 
     {
@@ -53,36 +59,6 @@ const funcionarios = [
         salarioHora: 8.52,
         horasTrabalhadas: 176,
         horasExtras: 0,
-
-        salarioLiquido(){
-            let salarioComDesconto = 0;
-
-            if(this.salarioBruto <= 900){
-
-                salarioComDesconto = this.salarioBruto;
-
-            }else if(this.salarioBruto > 900 && this.salarioBruto <= 1500){
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 5/100);
-
-            }else if(this.salarioBruto > 1500 && this.salarioBruto <= 2500){
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 10/100);
-
-            }else {
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 20/100);
-
-            }
-
-            salarioComDesconto < 900? salarioComDesconto : salarioComDesconto -= (this.salarioBruto * 3/100) ;
-
-            return `O Salário liquido do funcionário ${this.nome} é: R$${salarioComDesconto.toFixed(2).toString().replace(".", ",")}`;
-        },
-    
-        calcHorasExtras(){
-           return this.horasExtras > 0 ? (this.salarioHora + this.salarioHora / 2) * this.horasExtras : `O Funcionário ${this.nome} Não fez horas extras este mês!`;
-        }
     },
 
     {
@@ -92,32 +68,6 @@ const funcionarios = [
         salarioBruto: 560.00,
         salarioHora: 5,
         horasTrabalhadas: 92,
-
-        salarioLiquido(){
-            let salarioComDesconto = 0;
-
-            if(this.salarioBruto <= 900){
-
-                salarioComDesconto = this.salarioBruto;
-
-            }else if(this.salarioBruto > 900 && this.salarioBruto <= 1500){
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 5/100);
-
-            }else if(this.salarioBruto > 1500 && this.salarioBruto <= 2500){
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 10/100);
-
-            }else {
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 20/100);
-
-            }
-
-            salarioComDesconto < 900? salarioComDesconto : salarioComDesconto -= (this.salarioBruto * 3/100) ;
-
-            return `O Salário liquido do funcionário ${this.nome} é: R$${salarioComDesconto.toFixed(2).toString().replace(".", ",")}`;
-        },
     },
 
     {
@@ -128,45 +78,7 @@ const funcionarios = [
         salarioHora: 16.2,
         horasTrabalhadas: 176,
         horasExtras: 0,
-
-        salarioLiquido(){
-            let salarioComDesconto = 0;
-
-            if(this.salarioBruto <= 900){
-
-                salarioComDesconto = this.salarioBruto;
-
-            }else if(this.salarioBruto > 900 && this.salarioBruto <= 1500){
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 5/100);
-
-            }else if(this.salarioBruto > 1500 && this.salarioBruto <= 2500){
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 10/100);
-
-            }else {
-
-                salarioComDesconto = this.salarioBruto - (this.salarioBruto * 20/100);
-
-            }
-
-            salarioComDesconto < 900? salarioComDesconto : salarioComDesconto -= (this.salarioBruto * 3/100) ;
-
-            return `O Salário liquido do funcionário ${this.nome} é: R$${salarioComDesconto.toFixed(2).toString().replace(".", ",")}`;
-        },
-
-        calcHorasExtras(){
-            let valorHoraExtra = 0;
-        
-            if(this.horasExtras > 0){
-                valorHoraExtra = (this.salarioHora + (this.salarioHora * 50/100)) * this.horasExtras;
-        
-                return this.salarioBruto + valorHoraExtra;
-            }else {
-                return `O Funcionário ${this.nome} Não fez horas extras este mês`;  
-            }      
-        }
     }
 ];
 
-console.log(funcionarios[3].salarioLiquido())
+console.log(BuscaFuncionário('Carlos', 'Silva Santos', funcionarios));
