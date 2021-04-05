@@ -27,4 +27,4 @@ function EquacaoDoSegundoGrau(a, b, c){
    
 };
 
-console.log(EquacaoDoSegundoGrau(1, -2, 1))
+console.log(EquacaoDoSegundoGrau(0, -2, 1));
