@@ -2,6 +2,7 @@ function inverterPosicoes(vetor){
     let vetor1 = [];
     let vetor2 = [];
 
+    
     for(let i = 0; i < vetor.length; i++){
         if(i < (vetor.length / 2)){
             vetor1.push(vetor[i]);
