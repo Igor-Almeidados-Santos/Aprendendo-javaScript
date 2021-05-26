@@ -4,4 +4,4 @@ function anoBissexto(ano){
     return result == true ? `O ano ${ano} é bissexto!`: `O ano ${ano} não é bissexto!`;
 };
 
-console.log(anoBissexto(2020));
+console.log(anoBissexto(1963));
