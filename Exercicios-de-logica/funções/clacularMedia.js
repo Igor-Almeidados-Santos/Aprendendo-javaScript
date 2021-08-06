@@ -1,4 +1,5 @@
 function calcularMedia(notas, tipo) {
+    let mediaFinal = 0;
     let tipoMedia = tipo.toUpperCase();
 
     if(tipoMedia == 'A'){
